@@ -9,13 +9,11 @@ class Solution {
             left[i] = left[i-1] * nums[i-1];
         }
 
-        right[nums.length-1]=1;
+        right[nums.length-1] = 1;
+        answer[nums.length-1] = left[nums.length-1];
         for(int j = nums.length-2 ; j>=0 ; j--){
             right[j] = right[j+1] * nums[j+1];
-        }
-
-        for(int z =0 ; z<nums.length ; z++){
-            answer[z] = left[z] * right[z];
+            answer[j] = right[j] * left[j];
         }
 
         return answer;
