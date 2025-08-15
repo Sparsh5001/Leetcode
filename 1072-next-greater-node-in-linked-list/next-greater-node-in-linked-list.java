@@ -12,27 +12,30 @@ class Solution {
     public int[] nextLargerNodes(ListNode head) {
         int length = 0;
         ListNode temp = head;
-        while(temp!=null){
-            temp = temp.next;
-            length++;
-        }
-        int[] arr = new int[length];
+        ArrayList<Integer> List = new ArrayList<>();
+
         ListNode check;
         temp = head;
-        int i =0;
         while(temp!=null){
             check = temp;
             while(check!=null && check.val <= temp.val){
                 check = check.next;
             }
             if(check!=null){
-                arr[i] = check.val;
+                List.add(check.val);
               
             }
-            i++;
-            
+            else{
+                List.add(0);
+            }
+            length++;
             temp = temp.next;
         }
+        int[] arr = new int[List.size()];
+        for (int i = 0; i < List.size(); i++) {
+             arr[i] = List.get(i);
+        }
+
         return arr;
     }
 }
