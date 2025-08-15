@@ -25,14 +25,12 @@ class Solution {
             while(check!=null && check.val <= temp.val){
                 check = check.next;
             }
-            if(check==null){
-                arr[i] = 0;
-                i++;
-            }
-            else{
+            if(check!=null){
                 arr[i] = check.val;
-                i++;
+              
             }
+            i++;
+            
             temp = temp.next;
         }
         return arr;
