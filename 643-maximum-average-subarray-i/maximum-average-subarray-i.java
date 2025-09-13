@@ -10,9 +10,7 @@ class Solution {
         if(sum>max){
             max = sum;
         }
-        if(k<nums.length){
-            i = k;
-        }
+        i = k;
         while(i<nums.length){
             sum += nums[i];
             sum -= nums[i-k];
