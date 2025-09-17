@@ -1,54 +1,29 @@
 class Solution {
     public int search(int[] nums, int target) {
-        int peak = findpeak(nums);
-        int firsttry = tryfirst(nums , target , 0 , peak-1);
-        if(firsttry!=-1){
-            return firsttry;
-        }
-
-        int secondtry = tryfirst(nums , target , peak , nums.length-1);
-        return secondtry;
+        return find(nums , target , 0 , nums.length-1);
     }
 
 
-    int findpeak(int[] nums){
-        int start = 0;
-        int end = nums.length-1;
-        int mid=0;
-        while(start<end){
-            mid = start + (end-start)/2;
-                if(nums[mid]>nums[end])
-                {
-                   start = mid+1;
-                }
-                else
-                {
-                    end = mid;
-                }
+    public int find(int[] nums , int target , int s , int e){
+        if (s > e) return -1;
+        int mid = s + (e-s)/2;
+        if(nums[mid] == target){
+            return mid;
         }
-        return start;
-}
-
-int tryfirst(int[]nums , int target , int start , int end ){
-        int mid = 0;
-        while(start<=end)
-        {
-            mid = start + (end-start)/2;
-            if(nums[mid]==target)
-                {
-                    return mid;
-                }  
-            else if(nums[mid]>target)
-            {
-                end = mid-1;
-            }   
-            else if(nums[mid]<target)
-            {
-                start = mid+1;
-            }    
+        if(nums[mid] >= nums[s]){
+            if(nums[s] <= target && target <= nums[mid]){
+                return find(nums , target , s , mid-1);
+            }
+            else{
+                return find(nums , target , mid+1 , e);
+            }
         }
-        return -1;
-}
-
-
+        else {
+            if(nums[mid] <= target && target <= nums[e]){
+                return find(nums, target, mid+1, e);
+            } else {
+                return find(nums, target, s, mid-1);
+            }
+        }
+    }
 }
