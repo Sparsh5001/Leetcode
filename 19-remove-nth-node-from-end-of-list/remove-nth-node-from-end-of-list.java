@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if(head == null){
+        if(head == null || head.next == null){
             return null;
         }
         ListNode temp = head;
@@ -21,9 +21,6 @@ class Solution {
         }
         temp = head;
         int target = length-n;
-        if(length==1){
-            return null;
-        }
         if(target == 0){
             head = head.next;
             return head;
