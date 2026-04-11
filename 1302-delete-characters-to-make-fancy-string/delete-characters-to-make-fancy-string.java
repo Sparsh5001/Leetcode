@@ -5,25 +5,21 @@ class Solution {
         int l = s.length();
         if (l<3) return s;
 
-        char one = s.charAt(0);
-        char two = s.charAt(1);
         char cur;
         StringBuilder sb = new StringBuilder();
-        sb.append(one).append(two);
+        sb.append(s.charAt(0)).append(s.charAt(1));
 
         
         for(int i = 2 ; i<l ; i++){
             cur = s.charAt(i);
 
-            if(cur != one){
+            if(cur != s.charAt(i-1)){
                 sb.append(cur);
             }
-            else if(cur !=two){
+            else if(cur != s.charAt(i-2)){
                 sb.append(cur);
             }
 
-            one = two;
-            two = cur;
         }
 
         String str = sb.toString();
