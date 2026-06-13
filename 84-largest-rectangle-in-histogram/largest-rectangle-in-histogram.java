@@ -9,6 +9,8 @@ class Solution {
         int[] nsr = new int[n];
         int[] nsl = new int[n];
 
+        int max = 0;
+
         for(int i = 0 ; i<n ; i++){
             int x=0;
             if(!stack_Nsl.isEmpty()){
@@ -58,12 +60,6 @@ class Solution {
                 nsr[i] = -1;
             }
 
-        }
-
-
-        int max = 0;
-
-        for(int i = 0 ; i < n ; i++){
             int nsl_sum;
             int nsr_sum;
             if(nsl[i] == -1){
@@ -81,8 +77,9 @@ class Solution {
             if(nsr_sum + nsl_sum > max){
                 max = nsr_sum + nsl_sum;
             }
-            
+
         }
+
         return max;
     }
 
