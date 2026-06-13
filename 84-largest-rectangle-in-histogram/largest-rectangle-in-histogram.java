@@ -6,7 +6,7 @@ class Solution {
 
         int n = heights.length;
 
-        int[] nsr = new int[n];
+        //int[] nsr = new int[n];
         int[] nsl = new int[n];
 
         int max = 0;
@@ -39,6 +39,7 @@ class Solution {
 
         for(int i = n-1 ; i>-1 ; i--){
             int x=n-1;
+            int nsr=-99;
             if(!stack_Nsr.isEmpty()){
                 x = stack_Nsr.peek()[1] - 1; 
             }
@@ -46,7 +47,7 @@ class Solution {
             while(!stack_Nsr.isEmpty()){
 
                 if(stack_Nsr.peek()[0] < heights[i]){
-                    nsr[i] = stack_Nsr.peek()[1];
+                    nsr = stack_Nsr.peek()[1];
                     stack_Nsr.push( new int[]{heights[i] , x});
                     break;
                 }
@@ -57,7 +58,7 @@ class Solution {
 
             if(stack_Nsr.isEmpty()){
                 stack_Nsr.push(new int[]{heights[i] , x});
-                nsr[i] = -1;
+                nsr = -1;
             }
 
             int nsl_sum;
@@ -68,10 +69,10 @@ class Solution {
                  nsl_sum = (i-nsl[i])*heights[i];
             }
 
-            if(nsr[i] == -1){
+            if(nsr == -1){
                  nsr_sum = (n-i-1)*heights[i];
             }else{
-                 nsr_sum = (nsr[i]-i-1)*heights[i];
+                 nsr_sum = (nsr-i-1)*heights[i];
             }
 
             if(nsr_sum + nsl_sum > max){
