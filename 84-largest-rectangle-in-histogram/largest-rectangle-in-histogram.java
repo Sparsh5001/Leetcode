@@ -1,8 +1,7 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
         
-        Stack<int[]> stack_Nsr = new Stack<>();
-        Stack<int[]> stack_Nsl = new Stack<>();
+        Stack<int[]> stack = new Stack<>();
 
         int n = heights.length;
 
@@ -13,51 +12,52 @@ class Solution {
 
         for(int i = 0 ; i<n ; i++){
             int x=0;
-            if(!stack_Nsl.isEmpty()){
-                x = stack_Nsl.peek()[1] + 1;
+            if(!stack.isEmpty()){
+                x = stack.peek()[1] + 1;
             }
 
-            while(!stack_Nsl.isEmpty()){
+            while(!stack.isEmpty()){
 
-                if(stack_Nsl.peek()[0] < heights[i]){
-                    nsl[i] = stack_Nsl.peek()[1];
-                    stack_Nsl.push( new int[]{heights[i] , x});
+                if(stack.peek()[0] < heights[i]){
+                    nsl[i] = stack.peek()[1];
+                    stack.push( new int[]{heights[i] , x});
                     break;
                 }
                 else{
-                    stack_Nsl.pop();
+                    stack.pop();
                 }
             }
 
-            if(stack_Nsl.isEmpty()){
-                stack_Nsl.push(new int[]{heights[i] , x});
+            if(stack.isEmpty()){
+                stack.push(new int[]{heights[i] , x});
                 nsl[i] = -1;
             }
 
         }
 
+        stack.clear();
 
         for(int i = n-1 ; i>-1 ; i--){
             int x=n-1;
             int nsr=-99;
-            if(!stack_Nsr.isEmpty()){
-                x = stack_Nsr.peek()[1] - 1; 
+            if(!stack.isEmpty()){
+                x = stack.peek()[1] - 1; 
             }
 
-            while(!stack_Nsr.isEmpty()){
+            while(!stack.isEmpty()){
 
-                if(stack_Nsr.peek()[0] < heights[i]){
-                    nsr = stack_Nsr.peek()[1];
-                    stack_Nsr.push( new int[]{heights[i] , x});
+                if(stack.peek()[0] < heights[i]){
+                    nsr = stack.peek()[1];
+                    stack.push( new int[]{heights[i] , x});
                     break;
                 }
                 else{
-                    stack_Nsr.pop();
+                    stack.pop();
                 }
             }
 
-            if(stack_Nsr.isEmpty()){
-                stack_Nsr.push(new int[]{heights[i] , x});
+            if(stack.isEmpty()){
+                stack.push(new int[]{heights[i] , x});
                 nsr = -1;
             }
 
