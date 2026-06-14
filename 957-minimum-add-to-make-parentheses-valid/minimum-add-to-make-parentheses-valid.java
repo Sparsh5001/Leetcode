@@ -18,15 +18,7 @@ class Solution {
                 }
             }
         }
-
-        int count = 0 ;
-
-        while(!stack.isEmpty()){
-            count++;
-            stack.pop();
-        }
-
-        return count;
+        return stack.size();
 
 
     }
