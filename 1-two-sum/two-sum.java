@@ -1,19 +1,13 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        int n = nums.length;
-        int i;
-        int j;
-        int c[] = new int [2];
-        for ( i=0;i<n;i++){
-            for (j=i+1;j<n;j++){
-                if(nums[i]+nums[j]==target){
-                    c[0]=i;
-                    c[1]=j;
-                }
-               
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = 0 ; i < nums.length ; i++){
+            int find = target - nums[i];
+            if(map.containsKey(find)){
+                return new int[]{map.get(find),i};
             }
-        } 
-        return c;
-        //checking leetsync
+            map.put(nums[i] , i);
+        }
+    return new int[]{-1,-1};
     }
 }
