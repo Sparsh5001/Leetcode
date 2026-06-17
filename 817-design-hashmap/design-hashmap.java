@@ -1,59 +1,48 @@
+class Pair {
+    int key;
+    int value;
+
+    Pair(int key, int value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
 class Bucket {
-    LinkedList<int[]> container;
+
+    LinkedList<Pair> container;
 
     public Bucket() {
-        this.container = new LinkedList<int[]>();
+        this.container = new LinkedList<>();
     }
 
     public void insert(int val , int num){
-        int index = -1;
-
-        for (int i = 0; i < this.container.size(); i++) {
-            if (this.container.get(i)[0] == val) {
-                index = i;
-                break;
+        for (Pair pair : container) {
+            if (pair.key == val) {
+                pair.value = num;
+                return;
             }
         }
-        if(index==-1){
-            this.container.addFirst(new int[]{val , num});
-        }else{
-            this.container.get(index)[1] = num;
-        }
-
+        this.container.addFirst(new Pair(val , num));
     }
 
     public void delete(int val) {
-
-        int index = -1;
-        int i;
-        for (i = 0; i < this.container.size(); i++) {
-            if (this.container.get(i)[0] == val) {
-                index = i;
-                break;
+        for (Pair pair : container) {
+            if (pair.key == val) {
+                this.container.remove(pair);
+                return;
             }
         }
-        if(index!=-1){
-                this.container.remove(this.container.get(i));
-        }
-
     }
 
 
     public int find(int val) {
-        int index = -1;
-        int i;
-        for (i = 0; i < this.container.size(); i++) {
-            if (this.container.get(i)[0] == val) {
-                index = i;
-                break;
+        for (Pair pair : container) {
+            if (pair.key == val) {
+                return pair.value;
             }
         }
-        if(index!=-1){
-            return this.container.get(i)[1];
-        }else{
-            return -1;
-        }
-
+        return -1;
     }
 }
 
