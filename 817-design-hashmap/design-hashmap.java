@@ -17,7 +17,7 @@ class Bucket {
     }
 
     public void insert(int val , int num){
-        for (Pair pair : container) {
+        for (Pair pair : this.container) {
             if (pair.key == val) {
                 pair.value = num;
                 return;
@@ -27,14 +27,13 @@ class Bucket {
     }
 
     public void delete(int val) {
-        for (Pair pair : container) {
+        for (Pair pair : this.container) {
             if (pair.key == val) {
                 this.container.remove(pair);
                 return;
             }
         }
     }
-
 
     public int find(int val) {
         for (Pair pair : container) {
