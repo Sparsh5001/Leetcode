@@ -1,5 +1,5 @@
 class Bucket {
-        List<Integer> container;
+        LinkedList<Integer> container;
 
         public Bucket() {
             this.container = new LinkedList<Integer>();
