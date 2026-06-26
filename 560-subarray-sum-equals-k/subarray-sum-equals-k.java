@@ -4,8 +4,8 @@ class Solution {
         int prefix = 0 ;
         int count = 0 ;
         map.put(0,1);
-        for(int i = 0 ; i < nums.length ; i++){
-            prefix+=nums[i];
+        for(int num : nums){
+            prefix+=num;
             int rem = prefix-k;
             if(map.containsKey(rem)){
                 count+=map.get(rem);
