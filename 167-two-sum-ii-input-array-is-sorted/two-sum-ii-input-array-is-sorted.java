@@ -10,7 +10,7 @@ class Solution {
             if(sum>target){
                 j--;
             }
-            else if(sum<target){
+            else{
                 i++;
             }
         }
