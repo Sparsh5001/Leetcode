@@ -5,15 +5,13 @@ class Solution {
         int count = 0 ;
         int i = 0 ;
         int j = people.length-1;
-        while(i<j){
+        while(i<=j){
             int weight = people[i] + people[j];
-            if(weight>limit){
-                count++;j--;
-                continue;
+            if(weight<=limit){
+                i++;
             }
-            count++;i++;j--;
+            count++;j--;
         }
-        if(i==j) return count+1;
         return count;
     }
 }
