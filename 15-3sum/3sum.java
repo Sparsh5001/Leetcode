@@ -17,8 +17,8 @@ class Solution {
                     ans.add(list); 
                     int num_k = nums[k];
                     int num_j = nums[j];
-                    while(num_k==nums[k] && k>i) k--;
-                    while(num_j==nums[j] && j<=k) j++;      
+                    while (j < k && nums[j] == num_j) j++;
+                    while (j < k && nums[k] == num_k) k--;
                 }
                 else if(sum > 0){
                     k--;
