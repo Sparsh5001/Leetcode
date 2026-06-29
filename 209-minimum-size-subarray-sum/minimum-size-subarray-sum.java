@@ -3,8 +3,6 @@ class Solution {
         int min = Integer.MAX_VALUE ;
         int i = 0 ;
         int j = 0 ;
-        int start = 0 ;
-        int end = 0 ;
         int sum = 0 ;
 
         while(j<nums.length){
@@ -14,9 +12,7 @@ class Solution {
                     sum -= nums[i];
                     i++;
                 }
-                start = i-1;
-                end = j;
-                min = Math.min(min , Math.abs(end-start)+1);
+                min = Math.min(min , Math.abs(j-i+1)+1);
             }
             j++;
         }
