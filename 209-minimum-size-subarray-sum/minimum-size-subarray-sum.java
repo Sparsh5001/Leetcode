@@ -6,13 +6,11 @@ class Solution {
 
         for(int j = 0 ; j<nums.length ; j++){
             sum+=nums[j];
-            if(sum>=target){
                 while(i<nums.length && sum>=target){
-                    min = Math.min(min , Math.abs(j-i)+1);
+                    min = Math.min(min , j-i+1);
                     sum -= nums[i];
                     i++;
                 }
-            }
         }
         if(min == Integer.MAX_VALUE){
             return 0;
