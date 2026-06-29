@@ -9,9 +9,7 @@ class Solution {
 
         while(j<nums.length){
             sum+=nums[j];
-            if(sum<target){
-                j++;
-            }else{
+            if(sum>=target){
                 while(i<nums.length && sum>=target){
                     sum -= nums[i];
                     i++;
@@ -19,8 +17,8 @@ class Solution {
                 start = i-1;
                 end = j;
                 min = Math.min(min , Math.abs(end-start)+1);
-                j++;
             }
+            j++;
         }
         if(min == Integer.MAX_VALUE){
             return 0;
