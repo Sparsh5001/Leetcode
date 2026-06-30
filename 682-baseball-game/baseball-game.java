@@ -12,11 +12,7 @@ class Solution {
                 sum+=st.peek();
             }
             else if(s.equals("+")){
-                int val1 = st.peek();
-                st.pop();
-                int val2 = st.peek();
-                st.push(val1);
-                st.push(val1+val2);
+                st.push(st.peek()+st.get(st.size()-2));
                 sum+=st.peek();
             }
             else{
