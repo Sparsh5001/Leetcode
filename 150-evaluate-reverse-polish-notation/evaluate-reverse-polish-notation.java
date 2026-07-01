@@ -28,7 +28,7 @@ class Solution {
             }
 
         }
-    return st.peek();
+    return st.pop();
 
     }
 }
