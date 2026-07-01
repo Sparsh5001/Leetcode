@@ -7,7 +7,6 @@ class Solution {
         for(int i = 0 ; i < s.length()-1 ; i++){
 
             String sb = new String(s.substring(i+1,s.length())+s.substring(0,i+1));
-            System.out.println(sb);
             if(sb.equals(goal)) return true;
 
         }
