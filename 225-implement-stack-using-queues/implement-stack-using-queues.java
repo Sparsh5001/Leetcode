@@ -1,5 +1,5 @@
 class MyStack {
-    Queue<Integer> q = new LinkedList<>();
+    Queue<Integer> q;
     public MyStack() {
         this.q = new LinkedList<>();
     }
@@ -7,15 +7,12 @@ class MyStack {
     public void push(int x) {
         Queue<Integer> temp = new LinkedList<>();
         while(!this.q.isEmpty()){
-            temp.offer(this.q.peek());
-            this.q.poll();
+            temp.offer(this.q.poll());
         }
         this.q.offer(x);
         while(!temp.isEmpty()){
-            this.q.offer(temp.peek());
-            temp.poll();
+            this.q.offer(temp.poll());
         }
-        return;
     }
     
     public int pop() {
