@@ -11,20 +11,16 @@ class Solution {
                     stack.push(val);
                     continue;
                 }
-                while(!stack.isEmpty() && val<0){
-                    if(stack.peek()>0){
+                while(!stack.isEmpty() && stack.peek()>0){
                         int val_top = stack.pop();
-                        if(val*-1 > val_top){
-                        }
-                        else if(val*-1 == val_top){
+                        if(val*-1 == val_top){
                             break;
                         }
-                        else{
+                        else if(val*-1 < val_top){
                             val = val_top;
                             stack.push(val);
                             break;
                         }
-                    }
                     if(stack.isEmpty() || stack.peek()<0){
                         stack.push(val);
                         break;
