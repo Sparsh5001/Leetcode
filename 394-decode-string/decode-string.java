@@ -1,40 +1,32 @@
 class Solution {
     public String decodeString(String s) {
-        Stack<Character>stack = new Stack<>();
-
-        for(int i = 0 ; i < s.length() ; i++){
-            char c = s.charAt(i);
-
-            if(c != ']'){
-                stack.push(c);
-                continue;
+        Stack<Integer>countStack=new Stack<>();
+        Stack<StringBuilder>stringStack=new Stack<>();
+        StringBuilder curr=new StringBuilder();
+        int num=0;
+        for(char c:s.toCharArray()){
+            if(Character.isDigit(c)){
+                num=num*10+(c-'0');
             }
-            StringBuilder sb = new StringBuilder();
-            while(!stack.isEmpty() && stack.peek()!='['){
-                sb.append(stack.pop());   
+            else if(c=='['){
+                countStack.push(num);
+                stringStack.push(curr);
+                curr=new StringBuilder();
+                num=0;
             }
-            sb.reverse();
-            stack.pop();
-            int multi = 0;
-            int place = 1;
-            while (!stack.isEmpty() && Character.isDigit(stack.peek())) {
-                multi += (stack.pop() - '0') * place;
-                place *= 10;
+            else if(c==']'){
+                int repeat=countStack.pop();
+                StringBuilder prev=stringStack.pop();
+                while(repeat>0){
+                    prev.append(curr);
+                    repeat--;
+                }
+                curr=prev;
             }
-            StringBuilder decoded = new StringBuilder(sb.length() * multi);
-            while(multi>0){
-                decoded.append(sb);
-                multi--;
-            }
-            for (int j = 0; j < decoded.length(); j++) {
-                stack.push(decoded.charAt(j));
+            else{
+                curr.append(c);
             }
         }
-    StringBuilder sb = new StringBuilder();
-    while(!stack.isEmpty()){
-        sb.append(stack.pop());
-    }
-    sb.reverse();
-    return sb.toString();
+        return curr.toString();
     }
 }
