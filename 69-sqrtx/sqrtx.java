@@ -5,19 +5,18 @@ class Solution {
         } 
         int start = 1;
         int end = x/2;
-        int temp = 0;
+        long sq=0;
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            long sq = (long) mid * mid;
+            sq = (long) mid * mid;
             if (sq == x) {
                 return mid;
             } else if (sq < x) {
-                temp = mid;
                 start = mid + 1;
             } else {
                 end = mid - 1;
             }
         }
-        return temp;
+        return start-1;
     }
 }
