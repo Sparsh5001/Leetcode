@@ -2,11 +2,7 @@ class Solution {
     public int[] asteroidCollision(int[] asteroids) {
         Stack<Integer> stack = new Stack<>();
         for(int val : asteroids){
-            if(val>0 || stack.isEmpty()){
-                stack.push(val);
-                continue;
-            }
-            if(val<0 && stack.peek()<0){
+            if(val>0 || stack.isEmpty() || val<0 && stack.peek()<0){
                 stack.push(val);
                 continue;
             }
@@ -16,8 +12,7 @@ class Solution {
                     break;
                 }
                 else if(val*-1 < val_top){
-                    val = val_top;
-                    stack.push(val);
+                    stack.push(val_top);
                     break;
                 }
                 if(stack.isEmpty() || stack.peek()<0){
