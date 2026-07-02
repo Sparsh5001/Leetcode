@@ -9,12 +9,11 @@ class Solution {
                 stack.push(c);
                 continue;
             }
-            String temp="";
             StringBuilder sb = new StringBuilder();
             while(!stack.isEmpty() && stack.peek()!='['){
                 sb.append(stack.pop());   
             }
-            temp = sb.toString(); 
+            sb.reverse();
             stack.pop();
             int multi = 0;
             int place = 1;
@@ -22,13 +21,13 @@ class Solution {
                 multi += (stack.pop() - '0') * place;
                 place *= 10;
             }
-            while(multi>1){
-                sb = sb.append(temp);
+            StringBuilder decoded = new StringBuilder(sb.length() * multi);
+            while(multi>0){
+                decoded.append(sb);
                 multi--;
             }
-            int len = sb.length();
-            for(int j = len-1 ; j > -1 ; j--){
-                stack.push(sb.charAt(j));
+            for (int j = 0; j < decoded.length(); j++) {
+                stack.push(decoded.charAt(j));
             }
         }
     StringBuilder sb = new StringBuilder();
