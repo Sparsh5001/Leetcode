@@ -13,6 +13,7 @@ class Solution {
         int start = 1 ;
         int end = n-2;
         int mid = 0;
+        //finding peak here
         while(start<=end){
             mid=start+(end-start)/2;
             int val_mid = mountainArr.get(mid);
@@ -30,8 +31,8 @@ class Solution {
                 }
             }
         }
-        int a = BinarySearch(target,0,mid,mountainArr,n,true);
-        int b = BinarySearch(target,mid+1,n-1,mountainArr,n,false);
+        int a = BinarySearch(target,0,mid,mountainArr,n,true);//search in left array , which is sorted in asc
+        int b = BinarySearch(target,mid+1,n-1,mountainArr,n,false);//search in right array , sorted in desc
         //System.out.println(a);
         //System.out.println(b);
         if(a==-1){
