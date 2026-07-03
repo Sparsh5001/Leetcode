@@ -12,7 +12,7 @@ class Solution {
             int i = 0 ;
             while(i<piles.length){
                 if(piles[i] > mid){
-                    hours-=(piles[i] + mid - 1) / mid;
+                    hours-=(piles[i] + mid - 1) / mid; // ceiling divison
                     i++;
                 }else{
                     hours--;
