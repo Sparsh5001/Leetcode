@@ -1,18 +1,10 @@
 class Solution {
     public int maxDistance(int[] position, int m) {
-        int end = 0;
-        for(int p : position){
-            if(p>end){
-                end=p;
-            }
-        }
-        int start = 1;
         Arrays.sort(position);
-        if(m==2){
-            return position[position.length-1]-position[0];
-        }
-        while(start<=end){
+        int start = 1;
+        int end = position[position.length - 1] - position[0];
 
+        while(start<=end){
             int mid = start+(end-start)/2;
             int balls = 1;
             int i = 1;
