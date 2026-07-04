@@ -1,15 +1,14 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
-        
-
+        if ((long) m * k > bloomDay.length) {
+            return -1;
+        }
         int start = Integer.MAX_VALUE;
         int end = Integer.MIN_VALUE;
-
         for(int b : bloomDay){
             start = Math.min(start , b);
             end = Math.max(end , b);
         }
-        int check = end;
 
         while(start<=end){
             int mid = start+(end-start)/2;
@@ -32,10 +31,6 @@ class Solution {
                 start = mid+1;
             }
         }
-        if(start>check){
-            return -1;
-        }
-
     return start;
     }
 }
