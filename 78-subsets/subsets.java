@@ -1,19 +1,26 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        List<Integer> cur = new ArrayList<>();
-        find(result , cur , 0 , nums);
-        return result;
+        return helper(nums);
     }
 
-    public void find(List<List<Integer>> result , List<Integer> cur , int index , int[] nums){
-        if(index == nums.length){
-            result.add(new ArrayList<>(cur));
-            return;
-        }
-        cur.add(nums[index]);              
-        find(result, cur, index + 1, nums); 
-        cur.remove(cur.size() - 1);   
-        find(result, cur, index + 1, nums); 
+    public List<List<Integer>> helper(int[] nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        buildSets(nums , 0 , ans , list);
+        return ans;
     }
-}
+
+    public void buildSets( int[]nums , int i , List<List<Integer>> ans , List<Integer> list){
+        if(i==nums.length){
+             ans.add(new ArrayList<>(list));
+             return;
+        }
+        list.add(nums[i]);
+        buildSets(nums , i+1 , ans , list);
+       
+        list.removeLast();
+        buildSets(nums , i+1 , ans , list);
+
+    }
+
+    }
