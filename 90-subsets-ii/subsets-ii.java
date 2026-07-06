@@ -1,4 +1,6 @@
 class Solution {
+    HashSet<List<Integer>> set = new HashSet<>();
+
     public List<List<Integer>> subsetsWithDup(int[] nums) {
 
         return helper(nums);
@@ -8,16 +10,17 @@ class Solution {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
-        buildSets(nums , 0 , ans , list);
+        buildSets(nums , 0 , ans , list );
         return ans;
     }
 
-    public void buildSets( int[]nums , int i , List<List<Integer>> ans , List<Integer> list){
+    public void buildSets( int[]nums , int i , List<List<Integer>> ans , List<Integer> list ){
         if(i==nums.length){
-            if(ans.contains(list)){
+            if(set.contains(list)){
                 return;
             }
             ans.add(new ArrayList<>(list)); 
+            set.add(new ArrayList<>(list));
             return;
         }
         list.add(nums[i]);
