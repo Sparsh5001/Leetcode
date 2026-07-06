@@ -1,10 +1,10 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
+        return helper(digits);
+    }
 
-        List<String> result = new ArrayList<>();
-        if(digits.length() == 0) return result;
-        StringBuilder sb = new StringBuilder();
-        
+    public List<String> helper(String digits){
+        List<String> ans = new ArrayList<>();      
         HashMap<Character , String> map = new HashMap<>();
         map.put('2',"abc");
         map.put('3',"def");
@@ -14,29 +14,26 @@ class Solution {
         map.put('7',"pqrs");
         map.put('8',"tuv");
         map.put('9',"wxyz");
-
-        
-        create(map , result , sb , digits , 0);
-        return result;
-
+        StringBuilder sb = new StringBuilder();
+        solver(digits , ans , map , sb , 0);
+        return ans;
     }
 
+    public void solver(String digits , List<String> ans , HashMap<Character,String> map , StringBuilder sb , int i) {
 
-    public void create(HashMap<Character , String> map , List<String> result , StringBuilder sb , String digits , int index){
-
-
-        if(index == digits.length()){
-            StringBuilder sb1 = new StringBuilder(sb);
-            result.add(sb1.toString());
+        if(i==digits.length()){
+            ans.add(sb.toString());
             return;
         }
+        char c = digits.charAt(i);
+        int len = map.get(c).length();
 
-        for(int i = 0 ; i < map.get(digits.charAt(index)).length() ; i++){
-            sb.append(map.get(digits.charAt(index)).charAt(i));
-            create(map , result , sb , digits , index+1);
+        for(int j = 0 ; j<len ; j++){
+
+            sb.append(map.get(c).charAt(j));
+            solver(digits , ans , map , sb , i+1);
             sb.deleteCharAt(sb.length() - 1);
         }
-
-        return;
     }
+
 }
