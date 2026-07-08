@@ -21,20 +21,16 @@ class Solution {
             ans.add(new ArrayList<>(cur));
             return;
         }
-        if(index>n){
-            return;
+
+
+        for(int i = index ; i <= n ; i++){
+            cur.add(i);
+            combinations(ans,cur,i+1,n,k);
+            cur.remove(cur.size()-1);
         }
 
-        cur.add(index);
-        combinations(ans,cur,index+1,n,k);
-        cur.remove(cur.size()-1);
-        combinations(ans,cur,index+1,n,k);
-        
 
-        return;
-
-
-
+    return;
 
 
     }
