@@ -5,32 +5,26 @@ class Solution {
         find(result , cur , candidates , target , 0 , 0);
         return result;
     }
-
     public void find( List<List<Integer>> result , List<Integer> cur ,int[] candidates , int target , int index , int cur_sum ){
-
             if(index==candidates.length){
                 if(cur_sum == target){
                     result.add(new ArrayList<>(cur));
                 }
                 return;
             }
-
             if(cur_sum == target){
                 result.add(new ArrayList<>(cur));
                 return;
             }
-
             if(cur_sum > target){
                 return;
             }
-
             cur_sum += candidates[index];
             cur.add(candidates[index]);
             find(result , cur , candidates , target , index , cur_sum);
             cur.remove(cur.size()-1);
             cur_sum -= candidates[index];
             find(result , cur , candidates , target , index+1 , cur_sum);
-
         return;
     }
 }
