@@ -27,7 +27,7 @@ class Solution {
             cur_sum += candidates[index];
             cur.add(candidates[index]);
             find(result , cur , candidates , target , index , cur_sum);
-            cur.removeLast();
+            cur.remove(cur.size()-1);
             cur_sum -= candidates[index];
             find(result , cur , candidates , target , index+1 , cur_sum);
 
