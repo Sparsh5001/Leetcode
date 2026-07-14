@@ -1,24 +1,22 @@
 class Solution {
-    int count = 0;
-
     public int totalNQueens(int n) {
         int[][] board = new int[n][n];
-        solver( board ,  0 );
-        return count;      
+        return solver( board ,  0  , 0);       
     }
 
-    public void solver( int[][] board , int i){
+    public int solver( int[][] board , int i , int count){
         if(i==board.length){
             count++;
-            return;
+            return count;
         }
         for(int k = 0 ; k<board.length ; k++){
             if(check(board,i,k)){
                 board[i][k]=1;
-                solver(board,i+1);
+                count = solver(board,i+1,count);
                 board[i][k]=0;
             }
         }
+        return count;
     }
 
     public boolean check(int[][] board , int i , int k ){
