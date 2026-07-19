@@ -7,18 +7,14 @@ class Solution {
 
     public boolean helper(int[] sticks, int n) {
         boolean[] used = new boolean[sticks.length];
-
         int total = 0;
         for (int stick : sticks) {
             total += stick;
         }
-
         if (total % n != 0) {
             return false;
         }
-
         int req_sum = total / n;
-
         Arrays.sort(sticks);
 
         // Reverse to descending order
@@ -27,17 +23,13 @@ class Solution {
             sticks[i] = sticks[j];
             sticks[j] = temp;
         }
-
         if (sticks[0] > req_sum) {
             return false;
         }
-
         return solver(sticks, 0, used, 0, req_sum, 0, n);
     }
 
-    public boolean solver(int[] sticks, int parts, boolean[] used,
-                          int cur_sum, int req_sum, int k, int n) {
-
+    public boolean solver(int[] sticks, int parts, boolean[] used,int cur_sum, int req_sum, int k, int n){
         if (parts == n - 1) {
             return true;
         }
@@ -47,31 +39,24 @@ class Solution {
         }
 
         while (k < sticks.length) {
-
             if (used[k]) {
                 k++;
                 continue;
             }
-
             if (cur_sum + sticks[k] <= req_sum) {
-
                 used[k] = true;
-
                 if (solver(sticks, parts, used,
                            cur_sum + sticks[k], req_sum, k + 1, n)) {
                     return true;
                 }
-
                 used[k] = false;
             }
-
             int last = k;
             do {
                 k++;
             } while (k < sticks.length - 1 &&
                      sticks[k + 1] == sticks[last]);
         }
-
         return false;
     }
 }
