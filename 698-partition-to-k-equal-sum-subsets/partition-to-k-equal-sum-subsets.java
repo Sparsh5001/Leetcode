@@ -1,63 +1,77 @@
+import java.util.Arrays;
+
 class Solution {
-    public boolean canPartitionKSubsets(int[] matchsticks , int n) {
-        return helper(matchsticks , n);
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        return helper(nums, k);
     }
 
-    public boolean helper(int[] sticks , int n ){
+    public boolean helper(int[] sticks, int n) {
         boolean[] used = new boolean[sticks.length];
+
         int total = 0;
-        for(int stick : sticks){
-            total+=stick;
+        for (int stick : sticks) {
+            total += stick;
         }
-        if(total%n!=0){
+
+        if (total % n != 0) {
             return false;
         }
-        int parts = 0 ;
-        int cur_sum = 0 ;
-        int req_sum = total/n;
+
+        int req_sum = total / n;
+
         Arrays.sort(sticks);
 
-        return solver(sticks , parts , used , cur_sum , req_sum , 0 , n);
+        // Reverse to descending order
+        for (int i = 0, j = sticks.length - 1; i < j; i++, j--) {
+            int temp = sticks[i];
+            sticks[i] = sticks[j];
+            sticks[j] = temp;
+        }
+
+        if (sticks[0] > req_sum) {
+            return false;
+        }
+
+        return solver(sticks, 0, used, 0, req_sum, 0, n);
     }
 
+    public boolean solver(int[] sticks, int parts, boolean[] used,
+                          int cur_sum, int req_sum, int k, int n) {
 
-    public boolean solver(int[] sticks , int parts , boolean[]used , int cur_sum , int req_sum , int k , int n){
+        if (parts == n - 1) {
+            return true;
+        }
 
-            if(parts==n){
-                for(int i = 0 ; i < used.length ; i++){
-                    if(!used[i]){
-                        return false;
-                    }
-                }
-                return true;
+        if (cur_sum == req_sum) {
+            return solver(sticks, parts + 1, used, 0, req_sum, 0, n);
+        }
+
+        while (k < sticks.length) {
+
+            if (used[k]) {
+                k++;
+                continue;
             }
 
+            if (cur_sum + sticks[k] <= req_sum) {
 
-            if(cur_sum == req_sum){
-                if(solver(sticks,parts+1,used,0,req_sum,0,n)){
+                used[k] = true;
+
+                if (solver(sticks, parts, used,
+                           cur_sum + sticks[k], req_sum, k + 1, n)) {
                     return true;
                 }
+
+                used[k] = false;
             }
 
-            if(cur_sum>req_sum){
-                return false;
-            }
-            while(k<sticks.length){
-                if(used[k]){
-                    k++;
-                    continue;
-                }
-                used[k]=true;
-                int last_check = k;
-                if(solver(sticks,parts,used,cur_sum+sticks[k],req_sum,k+1,n)){
-                    return true;
-                }
-                used[k]=false;
-                do{
-                    k++;
-                }while(k<sticks.length-1 && sticks[k+1]==sticks[last_check]);
-                
-            }
+            int last = k;
+            do {
+                k++;
+            } while (k < sticks.length - 1 &&
+                     sticks[k + 1] == sticks[last]);
+        }
+
         return false;
     }
 }
