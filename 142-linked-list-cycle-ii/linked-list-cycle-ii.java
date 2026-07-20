@@ -18,15 +18,10 @@ public class Solution {
             fast = fast.next.next;
             slow = slow.next;
             if(fast == slow){
-                length = CheckLength( slow);
-                ListNode tempH = head;
                 ListNode temp = head;
-                for(int i = 0 ; i<length ; i++){
+                while(temp!=slow){
                     temp = temp.next;
-                }
-                while(temp != tempH){
-                    temp = temp.next;
-                    tempH = tempH.next;
+                    slow = slow.next;
                 }
                 return temp;
             }
@@ -34,13 +29,4 @@ public class Solution {
         return null;
     }
 
-    public int CheckLength( ListNode slow){
-            int count = 1;
-            ListNode current = slow.next;
-            while(slow!=current){
-                current = current.next;
-                count ++;
-            }
-            return count;
-    }
 }
