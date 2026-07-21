@@ -51,28 +51,16 @@ class Solution {
     }
 
 
-    public ListNode rev(ListNode start){
-        ListNode temp = start;
-        ListNode temp_fast = start;
-        ListNode tail = start;
-
-        if(start==null || start.next==null){
-            return start;
+    public ListNode rev(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        while(current!=null){
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
         }
-        temp = start.next;
-        temp_fast = start.next.next;
-
-        while(temp!=null){
-            temp.next=start;
-            start = temp;
-            temp = temp_fast; 
-            if(temp==null){
-                break;
-            }
-            temp_fast = temp_fast.next;
-        }
-        tail.next = null;
-        return start;
+        return prev;
     }
 
 }
