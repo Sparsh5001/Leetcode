@@ -1,0 +1,92 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head==null || head.next == null){
+            return head;
+        }
+        return mergeSort(head);
+    }
+
+    public ListNode mergeSort(ListNode head){
+        if(head.next==null){
+            return head;
+        }
+        ListNode mid = middleNode(head);
+
+        ListNode list1 = mergeSort(head);
+        ListNode list2 = mergeSort(mid);
+        return mergeTwoLists(list1,list2);
+
+    }
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1==null && list2==null){
+            return list1;
+        }
+        if(list1==null){
+            return list2;
+        }
+        if(list2==null){
+            return list1;
+        }
+
+        ListNode head;
+
+        if(list1.val <= list2.val){
+            head = list1;
+        }else{
+            head = list2;
+        }
+        ListNode hold;
+        while(list1!=null || list2!=null){
+            if(list1.val <= list2.val){
+                while(list1.next!=null && list1.next.val<=list2.val){
+                    list1=list1.next;
+                }
+                hold = list1.next;
+                list1.next = list2;
+                list1 = hold;
+                if(list1 == null){
+                    break;
+                }
+            }else{
+                while(list2.next!=null && list2.next.val<=list1.val){
+                    list2=list2.next;
+                }
+                hold = list2.next;
+                list2.next = list1;
+                list2 = hold;
+                if(list2 == null){
+                    break;
+                }
+            }
+        }
+        return head;
+    }
+
+
+
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = null;
+        return slow;
+    }
+
+
+}
