@@ -16,18 +16,18 @@ class Solution {
         if(head==null || head.next==null){
             return head;
         }
-
         temp = head.next;
         temp_fast = head.next.next;
 
-        while(temp_fast!=null){
+        while(temp!=null){
             temp.next=head;
             head = temp;
             temp = temp_fast; 
+            if(temp == null){
+                break;
+            }
             temp_fast = temp_fast.next;
         }
-        temp.next = head;
-        head = temp;
         tail.next = null;
         return head;
     }
