@@ -14,15 +14,14 @@ class LRUCache {
     HashMap<Integer,Node>map = new HashMap<>();
     Node front;
     Node tail;
-    int len;
     int cap;
-    int size=0;
+    int size;
 
 
     public LRUCache(int capacity) {
         front = null;
         tail = null;
-        len = 0;
+        size = 0;
         cap = capacity; 
     }
     
@@ -89,7 +88,6 @@ class LRUCache {
                 node.prev = node.next = null;
                 size++;
             }else{
-
                 node.prev=null;
                 node.next=front;
                 front.prev=node;
