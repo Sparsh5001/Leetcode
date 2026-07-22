@@ -47,20 +47,7 @@ class Solution {
         }
         return l1;
     }
-
-
-    public ListNode rev(ListNode head){
-        ListNode current = head;
-        ListNode prev = null;
-        while(current!=null){
-            ListNode next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;  
-        }
-        return prev;
-    }
-
+    
     public int length(ListNode head) {
         int len = 0;
         while (head != null) {
