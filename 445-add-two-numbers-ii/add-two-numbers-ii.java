@@ -11,63 +11,39 @@
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        if (length(l2) > length(l1)) {
-            ListNode temp = l1;
-            l1 = l2;
-            l2 = temp;
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+
+        while (l1 != null) {
+            s1.push(l1.val);
+            l1 = l1.next;
         }
 
-        ListNode temp1 = l1 = rev(l1);
-        ListNode temp2 = l2 = rev(l2);
-        ListNode prev = null;
+        while (l2 != null) {
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+
         int carry = 0;
+        ListNode head = null;
 
-        while(temp1!=null && temp2!=null){
+        while (!s1.isEmpty() || !s2.isEmpty() || carry != 0) {
 
-            int sum = temp1.val + temp2.val + carry;
-            temp1.val = sum % 10;
+            int sum = carry;
+
+            if (!s1.isEmpty())
+                sum += s1.pop();
+
+            if (!s2.isEmpty())
+                sum += s2.pop();
+
+            ListNode node = new ListNode(sum % 10);
+            node.next = head;
+            head = node;
+
             carry = sum / 10;
-
-            prev = temp1;
-            temp1 = temp1.next;
-            temp2 = temp2.next;
         }
 
-        while(temp1!=null){
-            int sum = temp1.val + carry;
-            temp1.val = sum % 10;
-            carry = sum / 10;
-
-            prev = temp1;
-            temp1 = temp1.next;
-        }
-        
-        if(carry == 1){
-            prev.next = new ListNode(1);
-        }
-        return rev(l1);
+        return head;
     }
-
-
-    public ListNode rev(ListNode head){
-        ListNode current = head;
-        ListNode prev = null;
-        while(current!=null){
-            ListNode next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;  
-        }
-        return prev;
-    }
-
-    public int length(ListNode head) {
-        int len = 0;
-        while (head != null) {
-            len++;
-            head = head.next;
-        }
-        return len;
-    }
-
 }
