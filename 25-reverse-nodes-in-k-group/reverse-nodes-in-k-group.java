@@ -38,15 +38,13 @@ class Solution {
         return head;
     }
 
-
     public ListNode rev(ListNode start , ListNode nex) {
         ListNode head = nex;
-        ListNode current = start;
-        while(current!=nex){
-            ListNode next = current.next;
-            current.next = head;
-            head = current;
-            current = next;
+        while(start!=nex){
+            ListNode next = start.next;
+            start.next = head;
+            head = start;
+            start = next;
         }
         return head;
     }
