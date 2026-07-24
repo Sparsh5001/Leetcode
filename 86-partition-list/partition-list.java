@@ -15,56 +15,28 @@ class Solution {
             return head;
         }
 
-        ListNode head1=head;
-        ListNode head2=head;
+        ListNode head1 = new ListNode();
+        ListNode head2 = new ListNode();
 
-        while(head1!=null && head1.val>=x){
-            head1 = head1.next;
-        }
+        ListNode temp1 = head1;
+        ListNode temp2 = head2;
 
-        while(head2!=null && head2.val<x){
-            head2 = head2.next;
-        }
-
-        if(head1==null && head2!=null){
-            return head;
-        }
-        if(head1!=null && head2==null){
-            return head;
-        }
-
-        
-        ListNode temp=head;
-        head = head1;
-        ListNode part = head2;
-
-        while(temp!=null){
-            if(temp==head1 || temp==head2){
-                temp = temp.next;
-                continue;
+        while(head!=null){
+            if(head.val<x){
+                temp1.next = head;
+                temp1 = temp1.next;
             }
-
-            if(temp==null){
-                break;
+            else{
+                temp2.next = head;
+                temp2 = temp2.next;
             }
-
-            if(temp.val<x){
-                head1.next = temp;
-                head1 = temp;
-                temp = temp.next;
-                continue;
-            }
-
-            if(temp.val>=x){
-                head2.next = temp;
-                head2 = temp;
-                temp = temp.next;
-                continue;
-            }
+            head = head.next;
         }
 
-        head1.next=part;
-        head2.next=null;
-        return head;
+        temp1.next = head2.next;
+        temp2.next = null;
+
+        return head1.next;
+
     }
 }
