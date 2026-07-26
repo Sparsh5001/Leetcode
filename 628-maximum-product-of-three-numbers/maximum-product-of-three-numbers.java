@@ -1,11 +1,35 @@
 class Solution {
     public int maximumProduct(int[] nums) {
-        if(nums.length==3){
-            return nums[0]*nums[1]*nums[2];
+        int max1 = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
+        int max3 = Integer.MIN_VALUE;
+
+        int min1 = Integer.MAX_VALUE;
+        int min2 = Integer.MAX_VALUE;
+
+        for (int num : nums) {
+
+            // Update three largest
+            if (num > max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = num;
+            } else if (num > max2) {
+                max3 = max2;
+                max2 = num;
+            } else if (num > max3) {
+                max3 = num;
+            }
+
+            // Update two smallest
+            if (num < min1) {
+                min2 = min1;
+                min1 = num;
+            } else if (num < min2) {
+                min2 = num;
+            }
         }
-        Arrays.sort(nums);
-        int productNeg = nums[0]*nums[1]*nums[nums.length-1];
-        int productPos = nums[nums.length-3]*nums[nums.length-2]*nums[nums.length-1];
-        return Math.max(productNeg , productPos);
+
+        return Math.max(max1 * max2 * max3, min1 * min2 * max1);
     }
 }
