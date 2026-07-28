@@ -7,13 +7,11 @@ class Solution {
         StringBuilder sb = new StringBuilder();
 
         char oddOne = 'A';
-        boolean t = true;
 
         for(int i = 0 ; i<26 ; i++){
             char ch = (char)('a'+i);
-            if(t && bucket[i] % 2 == 1){
+            if(bucket[i] % 2 == 1){
                 oddOne = ch;
-                t=false;
             }
             int x = bucket[i]/2;
             for (int j = 0; j < x; j++) {
