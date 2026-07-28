@@ -20,18 +20,12 @@ class Solution {
                 sb.append(ch);
             }
         }
+        StringBuilder sb2 = new StringBuilder(sb);
+        sb2.reverse();
         if(oddOne != 'A'){
             sb.append(oddOne);
         }
-        for(int i = 25 ; i>-1 ; i--){
-            char ch = (char)('a'+i);
-            int x = bucket[i]/2;
-            for (int j = 0; j < x; j++) {
-                sb.append(ch);
-            }
-        }
-
+        sb.append(sb2);
         return sb.toString();
-        
     }
 }
