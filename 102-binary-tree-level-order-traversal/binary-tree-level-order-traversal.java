@@ -15,49 +15,39 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
+
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> curLevel = new ArrayList<>();
-        if(root==null){
+
+        if (root == null) {
             return ans;
         }
-        Queue<TreeNode> levelNodes = new LinkedList<>();
-        levelNodes.offer(root);
-        levelNodes.offer(null);
-        curLevel.add(root.val);
-        ans.add(new ArrayList<>(curLevel));
-        levelOrderTraversal(ans,levelNodes);
-        return ans;
-    }
 
-    //in this approch i am trying to inset a null to mark end of level , the standard approach does something like
-    //take the size of queue before modifying it , run loop for that many times ,
-    // so if at some level queue is of size 1 , we run it once 
-    // after after that level there are 2 nodes , we again take size and this time it runs twice 
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
 
-    public void levelOrderTraversal(List<List<Integer>> ans , Queue<TreeNode> levelNodes){
-        List<Integer> curLevel = new ArrayList<>();
-        while(!levelNodes.isEmpty()){
-            if(levelNodes.peek()==null){
-                if(curLevel.size()==0){
-                    return;
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            List<Integer> level = new ArrayList<>();
+
+            for (int i = 0; i < size; i++) {
+
+                TreeNode current = queue.poll();
+
+                level.add(current.val);
+
+                if (current.left != null) {
+                    queue.offer(current.left);
                 }
-                ans.add(new ArrayList<>(curLevel));
-                curLevel.clear();
-                levelNodes.poll();
-                if(levelNodes.isEmpty()){
-                    return;
+
+                if (current.right != null) {
+                    queue.offer(current.right);
                 }
-                levelNodes.offer(null);
             }
-            if(levelNodes.peek().left != null){
-                curLevel.add(levelNodes.peek().left.val);
-                levelNodes.offer(levelNodes.peek().left);
-            }
-            if(levelNodes.peek().right != null){
-                curLevel.add(levelNodes.peek().right.val);
-                levelNodes.offer(levelNodes.peek().right);
-            }
-            levelNodes.poll();
+
+            ans.add(level);
         }
+
+        return ans;
     }
 }
