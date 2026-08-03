@@ -29,6 +29,11 @@ class Solution {
         return ans;
     }
 
+    //in this approch i am trying to inset a null to mark end of level , the standard approach does something like
+    //take the size of queue before modifying it , run loop for that many times ,
+    // so if at some level queue is of size 1 , we run it once 
+    // after after that level there are 2 nodes , we again take size and this time it runs twice 
+
     public void levelOrderTraversal(List<List<Integer>> ans , Queue<TreeNode> levelNodes){
         List<Integer> curLevel = new ArrayList<>();
         while(!levelNodes.isEmpty()){
