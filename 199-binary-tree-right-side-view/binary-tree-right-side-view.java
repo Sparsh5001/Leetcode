@@ -26,9 +26,11 @@ class Solution {
 
         while (!queue.isEmpty()) {
             int size = queue.size();
-            TreeNode current = null;
             for (int i = 0; i < size; i++) {
-                current = queue.poll();
+                TreeNode current = queue.poll();
+                if(i==size-1){
+                    ans.add(current.val);
+                }
                 if (current.left != null) {
                     queue.offer(current.left);
                 }
@@ -36,7 +38,6 @@ class Solution {
                     queue.offer(current.right);
                 }
             }
-            ans.add(current.val);
         }
         return ans;
     }
