@@ -24,7 +24,6 @@ class Solution {
             if(size%2==1){
                 return false;
             }
-            for (int i = 0; i < size/2; i++) {
                 TreeNode first = queue.poll();
                 TreeNode last = queue.poll();
                 
@@ -41,7 +40,6 @@ class Solution {
                 queue.offer(last.right);
                 queue.offer(first.right);
                 queue.offer(last.left);
-            }
         }
         return true;
     }
