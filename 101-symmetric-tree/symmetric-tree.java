@@ -20,27 +20,23 @@ class Solution {
         queue.offer(root.right);
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            if(size%2==1){
+            TreeNode first = queue.poll();
+            TreeNode last = queue.poll();
+                
+            if(first==null && last==null){
+                continue;
+            }
+            if(first==null || last==null){
+                return false;
+                }
+            if(first.val != last.val){
                 return false;
             }
-                TreeNode first = queue.poll();
-                TreeNode last = queue.poll();
-                
-                if(first==null && last==null){
-                    continue;
-                }
-                if(first==null || last==null){
-                    return false;
-                }
-                if(first.val != last.val){
-                    return false;
-                }
-                queue.offer(first.left);
-                queue.offer(last.right);
-                queue.offer(first.right);
-                queue.offer(last.left);
+            queue.offer(first.left);
+            queue.offer(last.right);
+            queue.offer(first.right);
+            queue.offer(last.left);
         }
-        return true;
+    return true;
     }
 }
